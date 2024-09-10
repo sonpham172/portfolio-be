@@ -52,7 +52,83 @@ const getAllUsers = () => {
   })
 }
 
+const getUserDetail = (userId) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const detailUser = await User.findOne({_id: userId});
+      if(!detailUser) {
+        resolve({
+          status: 'OK',
+          message: "User is not existed!",
+          data: null
+        })
+      }
+
+      resolve({
+        status: 'OK',
+        message: "Get all success",
+        data: detailUser
+      })
+    } catch (error) {
+      reject(error)
+    }
+  })
+}
+
+const updateUser = (userId, payload) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const detailUser = await User.findOne({_id: userId});
+      if(!detailUser) {
+        resolve({
+          status: 'OK',
+          message: "User is not existed!",
+          data: null
+        })
+      }
+
+      const updatedUser = await User.findByIdAndUpdate(userId, payload, {new: true})
+
+      resolve({
+        status: 'OK',
+        message: "Update user success",
+        data: updatedUser
+      })
+    } catch (error) {
+      reject(error)
+    }
+  })
+}
+
+const deleteUser = (userId) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const detailUser = await User.findOne({_id: userId});
+      if(!detailUser) {
+        resolve({
+          status: 'OK',
+          message: "User is not existed!",
+          data: null
+        })
+      }
+
+      await User.findByIdAndDelete(userId)
+
+      resolve({
+        status: 'OK',
+        message: "Delete user success"
+      })
+    } catch (error) {
+      reject(error)
+    }
+  })
+}
+
+
 module.exports = {
   createUser,
+  getUserDetail,
+  updateUser,
+  deleteUser,
   getAllUsers
 }

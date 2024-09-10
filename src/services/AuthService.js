@@ -52,7 +52,7 @@ const loginUser = (user) => {
 const generateJWT = async (payload) => {
   const token = jwt.sign({
     payload,
-  }, process.env.ACCESS_TOKEN, {expiresIn: '1m'})
+  }, process.env.ACCESS_TOKEN, {expiresIn: '1d'})
 
   return token;
 }

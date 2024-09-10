@@ -2,8 +2,6 @@ const mongoose = require("mongoose");
 const leaderSchema = new mongoose.Schema(
   {
     name: {type: String, required: true},
-    joinedAt: Date,
-    rejectedAt: {type: Date, required: false, default: null},
     level: String
   },
   {
